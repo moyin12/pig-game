@@ -14,12 +14,24 @@ init()
 document.querySelector('.btn--roll').addEventListener('click', function () {
     if(gamePlaying){
         //generate random values
-        var dice = Math.floor(Math.random() * 6) + 1;
+        var dice1 = Math.floor(Math.random() * 6) + 1;
+        var dice2 = Math.floor(Math.random() * 6) + 1;
+
 
         // display the dice showing the random values
-        var diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block'
-        diceDOM.src = `dice-${dice}.png`
+        document.getElementById('dice-1').style.display = 'block';
+        document.getElementById('dice-2').style.display = 'block';
+        document.getElementById('dice-1').src = `dice-${dice1}.png`
+        document.getElementById('dice-2').src = `dice-${dice2}.png`
+
+        if(dice1 !== 1 && dice2 !== 2){
+            roundScore += dice1 + dice2
+            document.querySelector(`#current--${activePlayer}`).textContent = roundScore;
+        } else {
+            nextPlayer()
+            
+        }
+        /*
         // update the current store if 1 is not rolled by the user.
         if(dice === 6 && PrevDice === 6){
             //Player loses global score
@@ -35,7 +47,8 @@ document.querySelector('.btn--roll').addEventListener('click', function () {
         }
 
         PrevDice = dice
-    }
+        */
+    } 
     
 })
 
@@ -56,7 +69,8 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
         // Check if player won the game
         if (scores[activePlayer] >= winningScore) {
             document.querySelector(`#name--${activePlayer}`).textContent = 'Winner!!!'
-            document.querySelector('.dice').style.display = 'none'
+            document.getElementById('dice-1').style.display = 'none';
+            document.getElementById('dice-2').style.display = 'none';
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
             document.querySelector(`.player--${activePlayer}`).classList.remove('player--active')
             gamePlaying = false
@@ -80,7 +94,8 @@ function nextPlayer() {
     document.querySelector('.player--1').classList.toggle('player--active');
 
     // Remove the dice image when a player gets 1
-    document.querySelector('.dice').style.display = 'none'
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
 }
 
 document.querySelector('.btn--new').addEventListener('click' , init)
@@ -95,7 +110,8 @@ function init() {
     score1.textContent = '0'
     currentScore0.textContent = '0'
     currentScore1.textContent = '0'
-    dice.style.display = 'none';
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
 
     document.querySelector(`#name--0`).textContent = 'Player 1'
     document.querySelector(`#name--1`).textContent = 'Player 2'
