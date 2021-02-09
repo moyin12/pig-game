@@ -165,3 +165,29 @@ main {
   font-weight: 700;
   color: #c7365f;
 }
+
+.input-number{
+  position: absolute;
+  left: 48%;
+  transform: translateX(-50px);
+  bottom: 20px;
+  /* width: 50px; */
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  outline: none;
+  max-width: 150px;
+  padding: 1rem;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

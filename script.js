@@ -25,7 +25,6 @@ document.querySelector('.btn--roll').addEventListener('click', function () {
             //Player loses global score
             scores[activePlayer] = 0
             document.querySelector(`#score--${activePlayer}`).textContent = '0'
-            document.querySelector(`#current--${activePlayer}`).textContent = '0'
             nextPlayer()
         }else if(dice !== 1){
             roundScore += dice
@@ -45,10 +44,17 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
         // Add current score to the global score
         scores[activePlayer] += roundScore;
         // Update the UI
-        document.querySelector(`#score--${activePlayer}`).textContent = scores[activePlayer]
+        document.querySelector(`#score--${activePlayer}`).textContent = scores[activePlayer];
+        var number = document.querySelector('#high--score').value;
 
+        // check if player inputed a value
+        if(number){
+            var winningScore = number;
+        }else{
+            winningScore = 100;
+        }
         // Check if player won the game
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= winningScore) {
             document.querySelector(`#name--${activePlayer}`).textContent = 'Winner!!!'
             document.querySelector('.dice').style.display = 'none'
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner')
