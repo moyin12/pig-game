@@ -1,6 +1,6 @@
 'use strict';
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, PrevDice;
 var currentScore0 = document.getElementById('current--0');
 var currentScore1 = document.getElementById('current--1');
 var score0 = document.getElementById('score--0');
@@ -20,15 +20,22 @@ document.querySelector('.btn--roll').addEventListener('click', function () {
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block'
         diceDOM.src = `dice-${dice}.png`
-
         // update the current store if 1 is not rolled by the user.
-        if(dice !== 1){
+        if(dice === 6 && PrevDice === 6){
+            //Player loses global score
+            scores[activePlayer] = 0
+            document.querySelector(`#score--${activePlayer}`).textContent = '0'
+            document.querySelector(`#current--${activePlayer}`).textContent = '0'
+            nextPlayer()
+        }else if(dice !== 1){
             roundScore += dice
             document.querySelector(`#current--${activePlayer}`).textContent = roundScore;
         } else {
             nextPlayer()
             
         }
+
+        PrevDice = dice
     }
     
 })
