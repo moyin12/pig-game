@@ -24,7 +24,7 @@ document.querySelector('.btn--roll').addEventListener('click', function () {
         document.getElementById('dice-1').src = `dice-${dice1}.png`
         document.getElementById('dice-2').src = `dice-${dice2}.png`
 
-        if(dice1 !== 1 && dice2 !== 2){
+        if(dice1 !== 1 && dice2 !== 1){
             roundScore += dice1 + dice2
             document.querySelector(`#current--${activePlayer}`).textContent = roundScore;
         } else {
